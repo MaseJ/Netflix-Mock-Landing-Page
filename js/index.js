@@ -178,37 +178,114 @@ floatAnimation5();
 
 
 
+// Let elements fade in on page load
+const loadInAnimation = () => {
+
+  const float = new TimelineMax();
+  const popcorn = document.querySelectorAll(".popcorn");
+  const signSection = document.querySelectorAll(".signSection");
+
+  float.from(".vintage__container", 2, {opacity: 0, ease:Power1.easeInOut})
+    .from(signSection, 2, {opacity: 0, ease:Power1.easeInOut}, "-=1.5")
+    .from(popcorn, 2, {opacity: 0, ease:Power1.easeInOut}, "-=1.5");
+};
+loadInAnimation();
 
 
 
 
 
-
-
-
+// Animations for scroll trigger
 
 let tlMainBg = gsap.timeline({ defaults: { ease: "power4.inOut", duration: 2}});
 
 gsap.registerPlugin(ScrollTrigger);
 
-gsap.to("#main", {
-    scrollTrigger: {
-        trigger: "#second",
-        start: 'top bottom',
-        toggleActions: "play reset reverse reset",
-        scrub: 1
-    },
-    clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)"
-});
+const popcorn = document.querySelectorAll(".popcorn");
 
- let tlSecondPage = gsap.timeline({
-   scrollTrigger: {
-     trigger: "#scrollTrigger",
-     start: "bottom bottom",
-     toggleActions: "play none reverse reset",
-   }
- })
-   .from("#movieText", {opacity: 0, duration: 2})
-   .to("#movieContainer", {opacity: .5, duration: 1.5}, "-=1");
+gsap.to("#signUp", {
+  x: -500,
+  duration: 2,
+  scrollTrigger: {
+    trigger: "#second",
+    scrub: 1,
+    toggleActions: "play none reverse none"
+  }
+})
+
+gsap.to("#signIn", {
+  x: 500,
+  duration: 2,
+  scrollTrigger: {
+    trigger: "#second",
+    scrub: 1,
+    toggleActions: "play none reverse none"
+  }
+})
+
+gsap.to(".vintage__container", {
+  y: -500,
+  duration: 2,
+  scrollTrigger: {
+    trigger: "#second",
+    scrub: 1,
+    toggleActions: "play none none none"
+  }
+})
+
+gsap.to("#movieContainer", {
+  opacity: .6,
+  duration: 2,
+  scrollTrigger: {
+    trigger: "#movieContainer",
+    start: "top 80%",
+    end: "bottom 40%",
+    scrub: 1,
+    toggleActions: "play none reverse none",
+    delay: 5
+  }
+})
+
+
+gsap.from("#tvText", {
+  x: 1500,
+  scrollTrigger: {
+    trigger: "#tvText",
+    start: "top center",
+    end: "top center",
+    scrub: 1,
+    toggleActions: "play reverse play none",
+  }
+})
+
+gsap.from("#tvContainer", {
+  x: -1700,
+  scrollTrigger: {
+    trigger: "#tvText",
+    start: "top center",
+    end: "top center",
+    scrub: 1,
+    toggleActions: "play reverse play none",
+  }
+})
+
+gsap.from(".fourthText", {
+  opacity: 0,
+  scrollTrigger: {
+    trigger: "#fourth",
+    start: "top center",
+    end: "top center",
+    scrub: 1,
+    toggleActions: "play reverse play none",
+  }
+})
+
+
+
+
+
+
+
+
 
 
